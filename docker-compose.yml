@@ -6,5 +6,12 @@ services:
     image: node:11
     volumes:
       - ./:/code
+    working_dir: /code
     command: npm install
-    work_dir: /code
+
+  nodemon:
+    image: node:11
+    volumes:
+      - ./:/code
+    working_dir: /code
+    command: npm run watch

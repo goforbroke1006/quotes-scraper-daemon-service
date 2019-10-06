@@ -5,7 +5,7 @@
     "main": "src/index.js",
     "scripts": {
         "build": "babel ./src --out-dir dist",
-        "watch": "nodemon src/index.js --exec babel-node --presets @babel/preset-env",
+        "watch": "./node_modules/.bin/nodemon src/index.js --exec ./node_modules/.bin/babel-node --presets @babel/preset-env",
         "serve": "npm run build && node dist/index.js",
         "test": "npm run build && mocha --require @babel/register"
     },

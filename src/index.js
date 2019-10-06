@@ -5,6 +5,6 @@ import { oanda } from "./service/oanda"
 //     xRates()
 // }, 5000)
 
-//setInterval(function () {
+setInterval(function () {
     oanda()
-//}, 180000)
+}, 30000)
