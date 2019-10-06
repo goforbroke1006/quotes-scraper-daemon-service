@@ -1,0 +1,28 @@
+{
+    "name": "exchange-rate-scraper",
+    "version": "1.0.0",
+    "description": "Training project",
+    "main": "src/index.js",
+    "scripts": {
+        "build": "babel ./src --out-dir dist",
+        "watch": "nodemon src/index.js --exec babel-node --presets @babel/preset-env",
+        "serve": "npm run build && node dist/index.js",
+        "test": "npm run build && mocha --require @babel/register"
+    },
+    "author": "Sergey Cherkesov <go.for.broke1006@gmail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/cli": "^7.6.2",
+        "@babel/core": "^7.6.2",
+        "@babel/node": "^7.6.2",
+        "@babel/preset-env": "^7.6.2",
+        "@babel/register": "^7.4.0",
+        "mocha": "^5.2.0",
+        "nodemon": "^1.17.5"
+    },
+    "dependencies": {
+        "axios": "^0.19.0",
+        "cheerio": "^1.0.0-rc.3",
+        "nightmare": "^3.0.0"
+    }
+}
