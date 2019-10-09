@@ -10,6 +10,8 @@ let parseData = html => {
     let result = [];
     const $ = cheerio.load(html)
     $('.inline_rates_container').each((ci, containerEl) => {
+        if (result.length > 4) return false;
+
         $(containerEl).find('.rate_row').each((rri, rowEl) => {
 
             const code = $(rowEl).find('.inline.title.left:nth-child(1)').text().trim()
@@ -31,12 +33,32 @@ let parseData = html => {
 const nightmare = Nightmare({ show: false })
 
 export function oanda() {
-    nightmare.goto('https://www1.oanda.com/lang/ru/currency/live-exchange-rates/')
-        .evaluate(() => {
-            return document.querySelector('body').innerHTML;
-        })
-        .end()
-        .then((responseHtml) => {
-            console.log(parseData(responseHtml))
-        });
+
+    nightmare
+        .goto('https://www1.oanda.com/lang/ru/currency/live-exchange-rates/')
+.then(() => {
+
+    while(true) {
+
+(async function() {
+
+        console.log('--------------------------------------------------')
+        await nightmare
+            .evaluate(() => {
+                return document.querySelector('#core_content').innerHTML;
+            })
+            .then((responseHtml) => {
+                console.log(parseData(responseHtml))
+            })
+            .catch(err => {console.error(err)})
+
+
+})()
+
+    }
+
+})
+
 }
+
+
