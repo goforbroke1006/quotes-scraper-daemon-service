@@ -2,25 +2,54 @@ version: '3'
 
 services:
 
-  node:
-    image: node:11
+  postgres:
+    image: postgres:10.4
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: quotes_db
+      PGDATA: /data/postgres
     volumes:
-      - ./:/code
-    working_dir: /code
-    command: npm install
+      - postgres-data:/data/postgres
+    ports:
+      - "15432:5432"
+    restart: unless-stopped
 
-  nodemon:
-    image: node:11
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
     volumes:
-      - ./:/code
-    working_dir: /code
-    command: npm run watch
+      - pgadmin-data:/root/.pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    restart: unless-stopped
+
+#  node:
+#    image: node:11
+#    volumes:
+#      - ./:/code
+#    working_dir: /code
+#    command: npm install
+
+#  nodemon:
+#    image: node:11
+#    volumes:
+#      - ./:/code
+#    working_dir: /code
+#    command: npm run watch
 
 
-  oanda_daemon:
-    build:
-      context: ./
-      dockerfile: ./deployment/Dockerfile
-    volumes:
-      - ./:/code
-    working_dir: /code
+#  oanda_daemon:
+#    build:
+#      context: ./
+#      dockerfile: ./deployment/Dockerfile
+#    volumes:
+#      - ./:/code
+#    working_dir: /code
+
+
+volumes:
+  postgres-data:
+  pgadmin-data:
