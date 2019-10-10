@@ -1,4 +1,4 @@
-# exchange-rate-scraper
+# quotes-scraper-daemon-service
 
 ### Project structure
 
