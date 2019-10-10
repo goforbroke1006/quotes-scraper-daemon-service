@@ -20,13 +20,7 @@ services:
   oanda_daemon:
     build:
       context: ./
-      dockerfile: ./deployment/Dockerfile-cmd
-#    image: node:11
+      dockerfile: ./deployment/Dockerfile
     volumes:
       - ./:/code
     working_dir: /code
-#    command: tail -f /dev/null
-    command: bash -c 'npm run build && npm run cmd-oanda'
-#node /code/dist/command/oanda/index.js
-#    command: bash -c 'npm run build && node dist/command/oanda/index.js && tail -f /dev/null'
-

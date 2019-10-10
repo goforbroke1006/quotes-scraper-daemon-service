@@ -8,7 +8,8 @@
     "watch": "./node_modules/.bin/nodemon src/index.js --exec ./node_modules/.bin/babel-node --presets @babel/preset-env",
     "serve": "npm run build && node dist/index.js",
     "test": "npm run build && mocha --require @babel/register",
-    "cmd-oanda": "node ./dist/command/oanda/index.js"
+    "cmd-oanda": "node ./dist/command/oanda/index.js",
+    "cmd-oanda-watch": "export DEBUG=nightmare && ./node_modules/.bin/nodemon src/command/oanda/index.js --exec ./node_modules/.bin/babel-node --presets @babel/preset-env"
   },
   "author": "Sergey Cherkesov <go.for.broke1006@gmail.com>",
   "license": "MIT",

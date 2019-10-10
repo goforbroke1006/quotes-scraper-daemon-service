@@ -1,8 +1,11 @@
-FROM node:11
+FROM goforbroke1006/nodejs-xvfb
 
-WORKDIR /code
-
-COPY ./ /code/
+COPY . /app/
+RUN npm install
 RUN npm run build
 
-ENTRYPOINT [ "node", "/code/dist/index.js" ] 
+ENV DISPLAY ":20"
+
+ENV DEBUG=nightmare
+
+CMD Xvfb $DISPLAY -screen 0 1366x768x16 & node dist/command/oanda/index.js
